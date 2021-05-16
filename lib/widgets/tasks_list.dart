@@ -8,6 +8,7 @@ class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(builder: (context, taskData, child) {
+      taskData.getData();
       return ListView.builder(
         itemBuilder: (context, index) {
           final Task task = taskData.tasks[index];
@@ -15,7 +16,7 @@ class TasksList extends StatelessWidget {
             taskTitle: task.name,
             isChecked: task.isDone,
             checkboxCallback: (newCheckboxState) {
-              context.read<TaskData>().toggleTask(task);
+              context.read<TaskData>().toggleTask(index);
             },
             deleteTaskCallback: () {
               context.read<TaskData>().deleteTask(index);
